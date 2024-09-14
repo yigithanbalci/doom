@@ -162,25 +162,6 @@
 (map! :leader
       :desc "Load new theme" "h t" #'counsel-load-theme)
 
-(ednc-mode 1)
-
-(defun show-notification-in-buffer (old new)
-  (let ((name (format "Notification %d" (ednc-notification-id (or old new)))))
-    (with-current-buffer (get-buffer-create name)
-      (if new (let ((inhibit-read-only t))
-                (if old (erase-buffer) (ednc-view-mode))
-                (insert (ednc-format-notification new t))
-                (pop-to-buffer (current-buffer)))
-        (kill-buffer)))))
-
-(add-hook 'ednc-notification-presentation-functions
-          #'show-notification-in-buffer)
-
-(evil-define-key 'normal ednc-view-mode-map
-  (kbd "d")   'ednc-dismiss-notification
-  (kbd "RET") 'ednc-invoke-action
-  (kbd "e")   'ednc-toggle-expanded-view)
-
 (setq elfeed-goodies/entry-pane-size 0.5)
 
 (evil-define-key 'normal elfeed-show-mode-map
@@ -207,22 +188,6 @@
                      ("https://www.techrepublic.com/rssfeeds/topic/open-source/" techrepublic linux)
                      ("https://betanews.com/feed" betanews linux)
                      ("http://lxer.com/module/newswire/headlines.rss" lxer linux))))
-
-(emms-all)
-(emms-default-players)
-(emms-mode-line 1)
-(emms-playing-time 1)
-(setq emms-source-file-default-directory "~/Music/"
-      emms-playlist-buffer-name "*Music*"
-      emms-info-asynchronously t
-      emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
-(map! :leader
-      (:prefix ("a" . "EMMS audio player")
-       :desc "Go to emms playlist"      "a" #'emms-playlist-mode-go
-       :desc "Emms pause track"         "x" #'emms-pause
-       :desc "Emms stop track"          "s" #'emms-stop
-       :desc "Emms play previous track" "p" #'emms-previous
-       :desc "Emms play next track"     "n" #'emms-next))
 
 (use-package emojify
   :hook (after-init . global-emojify-mode))
@@ -262,9 +227,9 @@
 
 (autoload 'exwm-enable "exwm-config.el")
 
-(setq doom-font (font-spec :family "DroidSansM Nerd Font Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
-      doom-big-font (font-spec :family "DroidSansM Nerd Font Mono" :size 24))
+(setq doom-font (font-spec :family "DroidSansM Nerd Font Propo" :size 15)
+      doom-variable-pitch-font (font-spec :family "DroidSansM Nerd Font Propo" :size 15)
+      doom-big-font (font-spec :family "DroidSansM Nerd Font Propo" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -347,7 +312,7 @@
       (:prefix ("t" . "toggle")
        :desc "Toggle minimap-mode" "m" #'minimap-mode))
 
-(set-face-attribute 'mode-line nil :font "Ubuntu Mono-13")
+(set-face-attribute 'mode-line nil :font "DroidSansM Nerd Font Propo")
 (setq doom-modeline-height 30     ;; sets modeline height
       doom-modeline-bar-width 5   ;; sets right bar width
       doom-modeline-persp-name t  ;; adds perspective name to modeline

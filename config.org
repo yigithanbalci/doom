@@ -20,9 +20,7 @@
   - [[#keybindings-within-dired-with-peep-dired-mode-enabled][Keybindings Within Dired With Peep-Dired-Mode Enabled]]
   - [[#making-deleted-files-go-to-trash-can][Making deleted files go to trash can]]
 - [[#doom-theme][DOOM THEME]]
-- [[#ednc-notifications][EDNC (Notifications)]]
 - [[#elfeed][ELFEED]]
-- [[#emms][EMMS]]
 - [[#emojis][EMOJIS]]
 - [[#erc][ERC]]
 - [[#evaluate-elisp-expressions][EVALUATE ELISP EXPRESSIONS]]
@@ -390,32 +388,6 @@ Setting the theme to doom-one.  To try out new themes, I set a keybinding for co
       :desc "Load new theme" "h t" #'counsel-load-theme)
 #+END_SRC
 
-* EDNC (Notifications)
-The Emacs Desktop Notification Center (EDNC) is an Emacs package written in pure Lisp that implements a desktop notifications service according to the freedesktop.org specification. EDNC aspires to be a small, but flexible drop-in replacement of standalone daemons like dunst.
-
-=NOTE=: Ensure that no other notification daemon (such as dunst) is active to use EDNC.
-
-#+begin_src emacs-lisp
-(ednc-mode 1)
-
-(defun show-notification-in-buffer (old new)
-  (let ((name (format "Notification %d" (ednc-notification-id (or old new)))))
-    (with-current-buffer (get-buffer-create name)
-      (if new (let ((inhibit-read-only t))
-                (if old (erase-buffer) (ednc-view-mode))
-                (insert (ednc-format-notification new t))
-                (pop-to-buffer (current-buffer)))
-        (kill-buffer)))))
-
-(add-hook 'ednc-notification-presentation-functions
-          #'show-notification-in-buffer)
-
-(evil-define-key 'normal ednc-view-mode-map
-  (kbd "d")   'ednc-dismiss-notification
-  (kbd "RET") 'ednc-invoke-action
-  (kbd "e")   'ednc-toggle-expanded-view)
-#+end_src
-
 * ELFEED
 An RSS newsfeed reader for Emacs.
 
@@ -446,35 +418,6 @@ An RSS newsfeed reader for Emacs.
                      ("https://www.techrepublic.com/rssfeeds/topic/open-source/" techrepublic linux)
                      ("https://betanews.com/feed" betanews linux)
                      ("http://lxer.com/module/newswire/headlines.rss" lxer linux))))
-#+END_SRC
-
-* EMMS
-One of the media players available for Emacs is emms, which stands for Emacs Multimedia System.  By default, Doom Emacs does not use 'SPC a',' so the format I use for these bindings is 'SPC a' plus 'key'.
-
-| COMMAND               | DESCRIPTION                       | KEYBINDING |
-|-----------------------+-----------------------------------+------------|
-| emms-playlist-mode-go | /Switch to the playlist buffer/     | SPC a a    |
-| emms-pause            | /Pause the track/                   | SPC a x    |
-| emms-stop             | /Stop the track/                    | SPC a s    |
-| emms-previous         | /Play previous track in playlist/   | SPC a p    |
-| emms-next             | /Play next track in playlist/       | SPC a n    |
-
-#+BEGIN_SRC emacs-lisp
-(emms-all)
-(emms-default-players)
-(emms-mode-line 1)
-(emms-playing-time 1)
-(setq emms-source-file-default-directory "~/Music/"
-      emms-playlist-buffer-name "*Music*"
-      emms-info-asynchronously t
-      emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
-(map! :leader
-      (:prefix ("a" . "EMMS audio player")
-       :desc "Go to emms playlist"      "a" #'emms-playlist-mode-go
-       :desc "Emms pause track"         "x" #'emms-pause
-       :desc "Emms stop track"          "s" #'emms-stop
-       :desc "Emms play previous track" "p" #'emms-previous
-       :desc "Emms play next track"     "n" #'emms-next))
 #+END_SRC
 
 * EMOJIS
@@ -559,9 +502,9 @@ Settings related to fonts within Doom Emacs:
 + 'font-lock-keyword-face' -- for keywords with special significance like 'setq' in elisp.
 
 #+BEGIN_SRC emacs-lisp
-(setq doom-font (font-spec :family "DroidSansM Nerd Font Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
-      doom-big-font (font-spec :family "DroidSansM Nerd Font Mono" :size 24))
+(setq doom-font (font-spec :family "DroidSansM Nerd Font Propo" :size 15)
+      doom-variable-pitch-font (font-spec :family "DroidSansM Nerd Font Propo" :size 15)
+      doom-big-font (font-spec :family "DroidSansM Nerd Font Propo" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -726,7 +669,7 @@ The modeline is the bottom status bar that appears in Emacs windows.  For more i
 https://github.com/seagle0128/doom-modeline
 
 #+begin_src emacs-lisp
-(set-face-attribute 'mode-line nil :font "Ubuntu Mono-13")
+(set-face-attribute 'mode-line nil :font "DroidSansM Nerd Font Propo")
 (setq doom-modeline-height 30     ;; sets modeline height
       doom-modeline-bar-width 5   ;; sets right bar width
       doom-modeline-persp-name t  ;; adds perspective name to modeline
