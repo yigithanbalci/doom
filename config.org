@@ -1,6 +1,6 @@
-#+TITLE: DT's Doom Emacs Config
-#+AUTHOR: Derek Taylor (DT)
-#+DESCRIPTION: DT's personal Doom Emacs config.
+#+TITLE: Yigithan's Doom Emacs Config
+#+AUTHOR: Yigithan Balci
+#+DESCRIPTION: Yigithan's personal Doom Emacs config. Forked from Derek Taylor (DT)
 #+STARTUP: showeverything
 
 * TABLE OF CONTENTS :toc:
@@ -559,9 +559,9 @@ Settings related to fonts within Doom Emacs:
 + 'font-lock-keyword-face' -- for keywords with special significance like 'setq' in elisp.
 
 #+BEGIN_SRC emacs-lisp
-(setq doom-font (font-spec :family "JetBrains Mono" :size 15)
+(setq doom-font (font-spec :family "DroidSansM Nerd Font Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
-      doom-big-font (font-spec :family "JetBrains Mono" :size 24))
+      doom-big-font (font-spec :family "DroidSansM Nerd Font Mono" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
