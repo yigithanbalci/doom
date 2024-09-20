@@ -237,6 +237,16 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
+(setq doom-font (font-spec :family "DroidSansM Nerd Font Propo" :size 15)
+      doom-variable-pitch-font (font-spec :family "DroidSansM Nerd Font Propo" :size 15)
+      doom-big-font (font-spec :family "DroidSansM Nerd Font Propo" :size 24))
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
+
 (setq imenu-list-focus-after-activation t)
 
 (map! :leader
@@ -289,7 +299,7 @@
        :desc "Ivy push view" "v p" #'ivy-push-view
        :desc "Ivy switch view" "v s" #'ivy-switch-view))
 
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 (map! :leader
       :desc "Comment or uncomment lines"      "TAB TAB" #'comment-line
       (:prefix ("t" . "toggle")
@@ -326,7 +336,7 @@
 (after! doom-themes
   (setq doom-neotree-enable-variable-pitch t))
 (map! :leader
-      :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
+      :desc "Toggle neotree file viewer" "e" #'neotree-toggle
       :desc "Open directory in neotree"  "d n" #'neotree-dir)
 
 (map! :leader
@@ -752,7 +762,7 @@
        :desc "Increment register" "+" #'increment-register
        :desc "Point to register" "SPC" #'point-to-register))
 
-(setq shell-file-name "/bin/fish"
+(setq shell-file-name "/bin/zsh" ;;was fish
       vterm-max-scrollback 5000)
 (setq eshell-rc-script "~/.config/doom/eshell/profile"
       eshell-aliases-file "~/.config/doom/eshell/aliases"
@@ -761,7 +771,7 @@
       eshell-hist-ignoredups t
       eshell-scroll-to-bottom-on-input t
       eshell-destroy-buffer-when-process-dies t
-      eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
+      eshell-visual-commands'("bash" "htop" "ssh" "top" "zsh"))
 (map! :leader
       :desc "Eshell"                 "e s" #'eshell
       :desc "Eshell popup toggle"    "e t" #'+eshell/toggle

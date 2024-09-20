@@ -27,6 +27,7 @@
 - [[#eww][EWW]]
 - [[#exwm][EXWM]]
 - [[#fonts][FONTS]]
+- [[#go][GO]]
 - [[#imenu][IMENU]]
 - [[#insert-date][INSERT DATE]]
 - [[#ivy][IVY]]
@@ -513,6 +514,26 @@ Settings related to fonts within Doom Emacs:
   '(font-lock-keyword-face :slant italic))
 #+END_SRC
 
+* GO
+Settings related to GoLang within Doom Emacs:
++ 'doom-font' -- standard monospace font that is used for most things in Emacs.
++ 'doom-variable-pitch-font' -- variable font which is useful in some Emacs plugins.
++ 'doom-big-font' -- used in doom-big-font-mode; useful for presentations.
++ 'font-lock-comment-face' -- for comments.
++ 'font-lock-keyword-face' -- for keywords with special significance like 'setq' in elisp.
+
+#+BEGIN_SRC emacs-lisp
+(setq doom-font (font-spec :family "DroidSansM Nerd Font Propo" :size 15)
+      doom-variable-pitch-font (font-spec :family "DroidSansM Nerd Font Propo" :size 15)
+      doom-big-font (font-spec :family "DroidSansM Nerd Font Propo" :size 24))
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
+#+END_SRC
+
 * IMENU
 Imenu produces menus for accessing locations in documents, typically in the current buffer. You can access the locations using an ordinary menu (menu bar or other) or using minibuffer completion, or you can install 'imenu-list' and have the imenu displayed as a vertical split that you can toggle show/hide.
 
@@ -626,7 +647,7 @@ I set comment-line to 'SPC TAB TAB' which is a rather comfortable keybinding for
 | toggle-truncate-lines    | /Toggle truncate lines/                     | SPC t t     |
 
 #+BEGIN_SRC emacs-lisp
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 (map! :leader
       :desc "Comment or uncomment lines"      "TAB TAB" #'comment-line
       (:prefix ("t" . "toggle")
@@ -698,7 +719,7 @@ Neotree is a file tree viewer.  When you open neotree, it jumps to the current f
 (after! doom-themes
   (setq doom-neotree-enable-variable-pitch t))
 (map! :leader
-      :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
+      :desc "Toggle neotree file viewer" "e" #'neotree-toggle
       :desc "Open directory in neotree"  "d n" #'neotree-dir)
 #+END_SRC
 
@@ -1244,7 +1265,7 @@ Settings for the various shells and terminal emulators within Emacs.
 | +vterm/toggle       | /Toggle vterm popup window/  | SPC v t    |
 
 #+BEGIN_SRC emacs-lisp
-(setq shell-file-name "/bin/fish"
+(setq shell-file-name "/bin/zsh" ;;was fish
       vterm-max-scrollback 5000)
 (setq eshell-rc-script "~/.config/doom/eshell/profile"
       eshell-aliases-file "~/.config/doom/eshell/aliases"
@@ -1253,7 +1274,7 @@ Settings for the various shells and terminal emulators within Emacs.
       eshell-hist-ignoredups t
       eshell-scroll-to-bottom-on-input t
       eshell-destroy-buffer-when-process-dies t
-      eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
+      eshell-visual-commands'("bash" "htop" "ssh" "top" "zsh"))
 (map! :leader
       :desc "Eshell"                 "e s" #'eshell
       :desc "Eshell popup toggle"    "e t" #'+eshell/toggle
