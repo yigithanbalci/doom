@@ -718,6 +718,7 @@ Neotree is a file tree viewer.  When you open neotree, it jumps to the current f
         neo-window-fixed-size nil))
 (after! doom-themes
   (setq doom-neotree-enable-variable-pitch t))
+//TODO yigithanbalci 06-03-2025: fix collison of leader e.
 (map! :leader
       :desc "Toggle neotree file viewer" "e" #'neotree-toggle
       :desc "Open directory in neotree"  "d n" #'neotree-dir)
